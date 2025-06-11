@@ -9,8 +9,9 @@ var echo =    "echo	  Print arguments to the terminal\n"
 var export =  "export	  Set environment variables\n"
 var unset =   "unset	  Unset environment variables\n"
 var alias =   "alias     Define command shortcuts\n"
-var help =    "help    Show help for built-in commands\n"
-var history = "history	  Show command history"
+var help =    "help      Show help for built-in commands\n"
+var history = "history	  Show command history\n"
+var clear =   "clear	  Clear the terminal screen"
 func Help(){
-	fmt.Println(cd+exit+pwd+echo+export+unset+alias+help+history)
+	fmt.Println(cd+exit+pwd+echo+export+unset+alias+help+history+clear)
 }

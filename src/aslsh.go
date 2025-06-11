@@ -46,6 +46,9 @@ func classifier(line string){
 		case "help":
 			commands.Help()
 			hist_file.SaveCommand(line)
+		case "alias":
+			commands.SetAlias(parts)
+			hist_file.SaveCommand(line)
 		default:
 			if len(line) != 0{
 				fmt.Println("aslsh: "+parts[0]+": command not found")
