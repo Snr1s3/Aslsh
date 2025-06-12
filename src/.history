@@ -1,19 +1,38 @@
-History File
-############help
-help
+pwd 
+pwd 
+history 
+alias 
+clear 
+history 
+clear 
+history 
+alias set hola echo hola
+alias set hola2 echo hola
+alias
+alias show
+alias set hola echo hola
+alias show
+alias unset hola
+alias show
+alias set hola echo hola
+alias unset hola
+asdsad
+alias un
+alias show
+alias set hola echo hola
+hola
+alias set hola echo hola
+alias show
+hola
+asd
+alias set p pwd
+alias show
+alias set hola echo hola
+alias show
+p
+pp
+p
+hola
+p
+c
 clear
-help
-help
-alias pwd
-alias
-alias
-alias hola
-alias
-alias sadasd
-alias
-alias cd
-alias pwd
-alias sadasd
-alias sada
-alias pwd
-alias Bondia echo bondia

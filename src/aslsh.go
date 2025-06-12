@@ -2,9 +2,8 @@ package main
 
 
 import (
-	"aslsh/util/user_input"
 	"aslsh/commands/commands"
-	"aslsh/util/hist_file"
+	"github.com/chzyer/readline"
 	"bufio"
 	"fmt"
 	"os"
@@ -14,46 +13,65 @@ import (
 )
 
 var cmd string = "$> "
+var exitB bool = false
 func main() {
-		initAslsh()
-		exitB := false
-		for !exitB {
-			line := user_input.ReadInputStr(cmd)
-			if line == "exit" {
-				exitB = true
-			} else {
-				classifier(line)
-			}
-		}
+	initAslsh()
+	completer := readline.NewPrefixCompleter(
+        readline.PcItem("echo"),
+        readline.PcItem("pwd"),
+        readline.PcItem("clear"),
+        readline.PcItem("history"),
+        readline.PcItem("help"),
+        readline.PcItem("alias"),
+		)
+	rl, err := readline.NewEx(&readline.Config{
+        Prompt:       cmd,
+		HistoryFile: "./.history",
+		HistoryLimit:  1000,
+        AutoComplete: completer,
+    })
+    if err != nil {
+        log.Fatalf("readline error: %v", err)
+    }
+    defer rl.Close()
+    for !exitB {
+        line, err := rl.Readline()
+        if err != nil {
+            break
+        }
+        if line == "exit" {
+            exitB = true
+        } else {
+			re := regexp.MustCompile(`\s+`)
+			line = re.ReplaceAllString(line, " ")
+			parts := strings.Split(line, " ")
+            exitB = classifier(parts)
+        }
+    }
 }
-func classifier(line string){
-		re := regexp.MustCompile(`\s+`)
-		line = re.ReplaceAllString(line, " ")
-		parts := strings.Split(line, " ")
+func classifier(parts []string) bool{
+		parts = commands.GetAlias(parts)
 		switch parts[0]{
 		case "echo":
 			commands.Echo(parts)
-			hist_file.SaveCommand(line)
 		case "pwd":
 			commands.Pwd(parts)
-			hist_file.SaveCommand(line)
 		case "clear":
 			commands.Clear()
-			hist_file.SaveCommand(line)
 		case "history":
-			hist_file.ReadHistory()
-			hist_file.SaveCommand(line)
+			commands.ReadHistory()
 		case "help":
 			commands.Help()
-			hist_file.SaveCommand(line)
 		case "alias":
-			commands.SetAlias(parts)
-			hist_file.SaveCommand(line)
+			commands.Alias(parts)
+		case "exit":
+			return true
 		default:
-			if len(line) != 0{
+			if len(parts[0]) != 0{
 				fmt.Println("aslsh: "+parts[0]+": command not found")
 			}
 		}
+		return false
 }
 
 func initAslsh(){
@@ -77,5 +95,7 @@ func parseRc(line string){
 		parts := strings.Split(line, "=")
 		if parts[0] == "ps"{
 			cmd = parts[1]
+		}
+		if parts[0] == "alias"{
 		}
 }
