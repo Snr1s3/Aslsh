@@ -36,3 +36,53 @@ hola
 p
 c
 clear
+hola
+ls
+hola
+pwd
+hola
+pwd
+hola
+show alias
+alias show
+c
+a
+s
+source
+p
+s
+hola
+s
+c
+s
+h
+s
+h
+sh
+s
+sh
+s
+sh
+alias unset c
+sh
+s
+sh
+pwd
+cd ../
+p
+exit
+cd ..
+pwd
+cd .
+pwd
+exit
+cd ./asda
+pwd
+man cd
+exit
+ls
+exit
+ls
+cd /
+pwd
+ls

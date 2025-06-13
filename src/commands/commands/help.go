@@ -11,7 +11,8 @@ var unset =   "unset	  Unset environment variables\n"
 var alias =   "alias     Define command shortcuts\n"
 var help =    "help      Show help for built-in commands\n"
 var history = "history	  Show command history\n"
+var source = "source 	  Reload .aslshrc\n"
 var clear =   "clear	  Clear the terminal screen"
 func Help(){
-	fmt.Println(cd+exit+pwd+echo+export+unset+alias+help+history+clear)
+	fmt.Println(cd+exit+pwd+echo+export+unset+alias+help+history+source+clear)
 }

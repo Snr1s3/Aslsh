@@ -23,6 +23,9 @@ func main() {
         readline.PcItem("history"),
         readline.PcItem("help"),
         readline.PcItem("alias"),
+        readline.PcItem("source"),
+        readline.PcItem("cd"),
+        readline.PcItem("ls"),
 		)
 	rl, err := readline.NewEx(&readline.Config{
         Prompt:       cmd,
@@ -55,7 +58,7 @@ func classifier(parts []string) bool{
 		case "echo":
 			commands.Echo(parts)
 		case "pwd":
-			commands.Pwd(parts)
+			commands.Pwd()
 		case "clear":
 			commands.Clear()
 		case "history":
@@ -66,6 +69,12 @@ func classifier(parts []string) bool{
 			commands.Alias(parts)
 		case "exit":
 			return true
+		case "source":
+			initAslsh()
+		case "cd":
+			commands.Cd(parts[1])
+		case "ls":
+			commands.Ls()
 		default:
 			if len(parts[0]) != 0{
 				fmt.Println("aslsh: "+parts[0]+": command not found")
@@ -97,5 +106,7 @@ func parseRc(line string){
 			cmd = parts[1]
 		}
 		if parts[0] == "alias"{
+			parts := strings.Split(parts[1], " ")
+			commands.AliasRc(parts)
 		}
 }
