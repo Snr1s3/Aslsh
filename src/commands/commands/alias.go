@@ -45,11 +45,11 @@ func SetAlias(alias []string){
     }
 		
 		if _, exists := aliasMap[alias[2]]; exists {
-				fmt.Println("Alias name starts with a forbidden character.")
+				fmt.Println("Alias name starts with a forbidden character1.")
 				return
 		}
-    if !validAliasStart.MatchString(alias[2]) || !slices.Contains(commandList, alias[2]){
-        fmt.Println("Alias name starts with a forbidden character.")
+    if !validAliasStart.MatchString(alias[2]) || slices.Contains(commandList, alias[2]){
+        fmt.Println("Alias name starts with a forbidden character2.")
         return
     }
     aliasMap[alias[2]] = alias[3:]

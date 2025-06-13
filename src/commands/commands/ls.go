@@ -22,21 +22,13 @@ func Ls(){
 						files = append(files, entry.Name())
 				}
 		}
-		
-		for _, entry := range entries {
-				if entry.IsDir() {
-						fmt.Println("DIR:", entry.Name())
-				} else {
-						fmt.Println("FILE:", entry.Name())
-				}
-		}
 
 
-		for dir := range dirs{
+		for _, dir := range dirs{
 				fmt.Println(dir)
 		}
 
-		for file := range files{
+		for _,file := range files{
 				fmt.Println(file)
 		}
 

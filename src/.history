@@ -86,3 +86,44 @@ ls
 cd /
 pwd
 ls
+pwd
+ls
+sudo su
+help
+poweroff
+alias set e=echo
+alias set e echo 
+s
+sh
+alias set e echo hola
+e
+alias set bondia echo holA
+alias set e echo hola
+e
+e aaa
+source
+history
+clear
+ls
+clear
+e "; pwd
+e ;pwd
+cd /
+p
+ls
+ cd
+ls
+pwd
+cd ~
+cd ..
+exit
+cls
+clear
+ s
+source
+clear
+source
+s
+cc
+c
+exit

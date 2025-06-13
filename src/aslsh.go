@@ -38,6 +38,12 @@ func main() {
     }
     defer rl.Close()
     for !exitB {
+				rl, err = readline.NewEx(&readline.Config{
+						Prompt:       cmd,
+				HistoryFile: "./.history",
+				HistoryLimit:  1000,
+						AutoComplete: completer,
+				})
         line, err := rl.Readline()
         if err != nil {
             break

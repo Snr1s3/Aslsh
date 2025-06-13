@@ -1,5 +1,4 @@
-ps=asegura@Bondia:
-
+ps=asegura:
 alias=hola echo hola
 alias=c clear
 alias=s source
