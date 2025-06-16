@@ -1,12 +1,14 @@
 package commands
+
 import (
 	"fmt"
+	"regexp"
+
 	"golang.org/x/exp/slices"
-    "regexp"
 )
 
 var aliasMap map[string][]string = make(map[string][]string)
-var commandList = []string{"cd", "exit", "pwd", "echo", "help", "history", "clear", "source","alias"}
+var commandList = []string{"cd", "exit", "pwd", "echo", "help", "history", "clear", "source","alias","cat"}
 var validAliasStart = regexp.MustCompile(`^[^-=|><&;$` + "`" + `"'\\/:#@]`)
 func Alias(alias []string) {
     if len(alias) < 2 {

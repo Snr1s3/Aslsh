@@ -25,11 +25,11 @@ func Ls(){
 
 
 		for _, dir := range dirs{
-				fmt.Println(dir)
+				fmt.Println("d "+dir)
 		}
 
 		for _,file := range files{
-				fmt.Println(file)
+				fmt.Println("f "+file)
 		}
 
 }

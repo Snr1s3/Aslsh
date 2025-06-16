@@ -1,14 +1,13 @@
 package commands
 
-import(
-	"os"
-	"log"
+import (
 	"bufio"
 	"fmt"
+	"log"
+	"os"
 )
 
-func ReadHistory(){
-	path := "./.history"
+func ReadHistory(path string){
 	file, err := os.Open(path)
 	if err != nil {
 			log.Fatalf("failed to open file: %s", err)

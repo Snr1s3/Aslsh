@@ -1,17 +1,17 @@
 package main
 
-
 import (
 	"aslsh/commands/commands"
-	"github.com/chzyer/readline"
 	"bufio"
 	"fmt"
-	"os"
-	"strings"
-	"regexp"
 	"log"
-)
+	"os"
+	"regexp"
+	"strings"
 
+	"github.com/chzyer/readline"
+)
+var path = "/home/asegura/.ASLSH_history"
 var cmd string = "$> "
 var exitB bool = false
 func main() {
@@ -26,10 +26,12 @@ func main() {
         readline.PcItem("source"),
         readline.PcItem("cd"),
         readline.PcItem("ls"),
+        readline.PcItem("cat"),
+        readline.PcItem("touch"),
 		)
 	rl, err := readline.NewEx(&readline.Config{
         Prompt:       cmd,
-		HistoryFile: "./.history",
+		HistoryFile:  path,
 		HistoryLimit:  1000,
         AutoComplete: completer,
     })
@@ -44,8 +46,8 @@ func main() {
 				HistoryLimit:  1000,
 						AutoComplete: completer,
 				})
-        line, err := rl.Readline()
-        if err != nil {
+        line, erro := rl.Readline()
+        if erro != nil || err != nil {
             break
         }
         if line == "exit" {
@@ -68,7 +70,7 @@ func classifier(parts []string) bool{
 		case "clear":
 			commands.Clear()
 		case "history":
-			commands.ReadHistory()
+			commands.ReadHistory(path)
 		case "help":
 			commands.Help()
 		case "alias":
@@ -78,9 +80,11 @@ func classifier(parts []string) bool{
 		case "source":
 			initAslsh()
 		case "cd":
-			commands.Cd(parts[1])
+			commands.Cd(parts)
 		case "ls":
 			commands.Ls()
+		case "cat":
+			commands.Cat(parts)
 		default:
 			if len(parts[0]) != 0{
 				fmt.Println("aslsh: "+parts[0]+": command not found")
