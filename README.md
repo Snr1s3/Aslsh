@@ -44,6 +44,24 @@ ps=your_prompt_here
 - `.aslshrc` - Shell configuration file
 - `.history` - Command history file
 
+## Testing
+
+Unit tests are provided for built-in commands. To run the tests:
+
+```sh
+cd src
+go test -v ./testing
+```
+
+You can also run all tests in the project (if you add more):
+
+```sh
+go test -v ./...
+```
+
+The tests cover command behaviors such as `cd` and `pwd`.  
+Test results will be shown in the terminal, indicating which tests passed or failed.
+
 ## License
 
 This project is for educational purposes.
