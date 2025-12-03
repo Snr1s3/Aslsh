@@ -1,13 +1,15 @@
 package commands
-import (
-	"fmt"
-)
-func Echo(parts []string){
-		for i := 1; i< len(parts); i++ {
-			fmt.Print(parts[i])
-			if i < len(parts)-1{
-				fmt.Print(" ")
-			}
-		}
-		fmt.Println()
+
+func Echo(parts []string) string {
+    if len(parts) < 2 {
+        return ""
+    }
+    returnString := ""
+    for i := 1; i < len(parts); i++ {
+        returnString += parts[i]
+        if i < len(parts)-1 {
+            returnString += " "
+        }
+    }
+    return returnString
 }

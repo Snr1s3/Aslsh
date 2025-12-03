@@ -1,35 +1,27 @@
 package commands
 
 import (
-	"fmt"
-	"log"
 	"os"
+	"strings"
 )
 
-func Ls(){
-		var dirs []string
-		var files []string
+func Ls() (string, error) {
+	var dirs []string
+	var files []string
 
-		entries, err := os.ReadDir(".")
-		if err != nil {
-				log.Fatal(err)
+	entries, err := os.ReadDir(".")
+	if err != nil {
+		return "", err
+	}
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			dirs = append(dirs, "d "+entry.Name())
+		} else {
+			files = append(files, "f "+entry.Name())
 		}
+	}
 
-		for _, entry := range entries {
-				if entry.IsDir() {
-						dirs = append(dirs, entry.Name())
-				} else {
-						files = append(files, entry.Name())
-				}
-		}
-
-
-		for _, dir := range dirs{
-				fmt.Println("d "+dir)
-		}
-
-		for _,file := range files{
-				fmt.Println("f "+file)
-		}
-
+	result := strings.Join(append(dirs, files...), "\n")
+	return result, nil
 }

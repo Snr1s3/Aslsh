@@ -5,11 +5,11 @@ import (
 	"os"
 )
 
-func Touch(name string){
+func Touch(name string) string {
 	file, err := os.Create(name)
 	if err != nil {
-		fmt.Println("Error creating file:", err)
-		return
+		return fmt.Sprintf("Error creating file: %v", err)
 	}
 	defer file.Close()
+	return ""
 }

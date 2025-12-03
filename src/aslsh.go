@@ -60,37 +60,49 @@ func main() {
         }
     }
 }
-func classifier(parts []string) bool{
-		parts = commands.GetAlias(parts)
-		switch parts[0]{
-		case "echo":
-			commands.Echo(parts)
-		case "pwd":
-			fmt.Println(commands.Pwd())
-		case "clear":
-			commands.Clear()
-		case "history":
-			commands.ReadHistory(path)
-		case "help":
-			commands.Help()
-		case "alias":
-			commands.Alias(parts)
-		case "exit":
-			return true
-		case "source":
-			initAslsh()
-		case "cd":
-			commands.Cd(parts)
-		case "ls":
-			commands.Ls()
-		case "cat":
-			commands.Cat(parts)
-		default:
-			if len(parts[0]) != 0{
-				fmt.Println("aslsh: "+parts[0]+": command not found")
-			}
-		}
-		return false
+func classifier(parts []string) bool {
+    parts = commands.GetAlias(parts)
+    var output string
+    var err error
+
+    switch parts[0] {
+    case "echo":
+        output = commands.Echo(parts)
+    case "pwd":
+        output, err = commands.Pwd()
+    case "clear":
+        output = commands.Clear()
+    case "history":
+        output, err = commands.ReadHistory(path)
+    case "help":
+        output = commands.Help()
+    case "alias":
+        output = commands.Alias(parts)
+    case "exit":
+        return true
+    case "source":
+        initAslsh()
+        return false
+    case "cd":
+        output = commands.Cd(parts)
+    case "ls":
+        output, err = commands.Ls()
+    case "cat":
+        output, err = commands.Cat(parts)
+    case "touch":
+        output = commands.Touch(parts[1])
+    default:
+        if len(parts[0]) != 0 {
+            output = "aslsh: " + parts[0] + ": command not found"
+        }
+    }
+
+    if err != nil {
+        fmt.Println("Error:", err)
+    } else if len(output) > 0 {
+        fmt.Println(output)
+    }
+    return false
 }
 
 func initAslsh(){

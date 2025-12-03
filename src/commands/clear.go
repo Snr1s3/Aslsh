@@ -1,8 +1,5 @@
 package commands
-import (
-	"fmt"
-)
 
-func Clear(){
-	fmt.Print("\033[H\033[2J")
+func Clear() string {
+    return "\033[H\033[2J"
 }

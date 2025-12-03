@@ -9,23 +9,19 @@ import (
 var aliasMap map[string][]string = make(map[string][]string)
 var commandList = []string{"cd", "exit", "pwd", "echo", "help", "history", "clear", "source","alias","cat"}
 var validAliasStart = regexp.MustCompile(`^[^-=|><&;$` + "`" + `"'\\/:#@]`)
-func Alias(alias []string) {
+
+func Alias(alias []string) string {
     if len(alias) < 2 {
-        fmt.Println("Invalid alias command. Use 'alias set' or 'alias unset'.")
-        fmt.Println("Usage: alias set [name] [command] [arguments...]")
-        fmt.Println("Usage: alias unset [name]")
-        return
+        return "Invalid alias command. Use 'alias set' or 'alias unset'.\nUsage: alias set [name] [command] [arguments...]\nUsage: alias unset [name]"
     }
     if alias[1] == "set" && len(alias) > 3 {
-        SetAlias(alias)
+        return SetAlias(alias)
     } else if alias[1] == "unset" && len(alias) == 3 {
-        UnsetAlias(alias[2])
+        return UnsetAlias(alias[2])
     } else if alias[1] == "show" && len(alias) == 2 {
-        ShowAlias()
-    }else {
-        fmt.Println("Invalid alias command. Use 'alias set' or 'alias unset'.")
-        fmt.Println("Usage: alias set [name] [command] [arguments...]")
-        fmt.Println("Usage: alias unset [name]")
+        return ShowAlias()
+    } else {
+        return "Invalid alias command. Use 'alias set' or 'alias unset'.\nUsage: alias set [name] [command] [arguments...]\nUsage: alias unset [name]"
     }
 }
 
@@ -38,23 +34,18 @@ func GetAlias(parts []string) []string {
     }
     return parts
 }
-func SetAlias(alias []string){
-    
+func SetAlias(alias []string) string {
     if !slices.Contains(commandList, alias[3]) {
-        fmt.Println("Command not found:", alias[3])
-        return
+        return fmt.Sprintf("Command not found: %s", alias[3])
     }
-		
-		if _, exists := aliasMap[alias[2]]; exists {
-				fmt.Println("Alias name starts with a forbidden character1.")
-				return
-		}
-    if !validAliasStart.MatchString(alias[2]) || slices.Contains(commandList, alias[2]){
-        fmt.Println("Alias name starts with a forbidden character2.")
-        return
+    if _, exists := aliasMap[alias[2]]; exists {
+        return "Alias name starts with a forbidden character1."
+    }
+    if !validAliasStart.MatchString(alias[2]) || slices.Contains(commandList, alias[2]) {
+        return "Alias name starts with a forbidden character2."
     }
     aliasMap[alias[2]] = alias[3:]
-    fmt.Printf("Alias '%s' set to: %v\n", alias[2], alias[3:])
+    return fmt.Sprintf("Alias '%s' set to: %v", alias[2], alias[3:])
 }
 
 func AliasRc(alias []string){
@@ -74,17 +65,18 @@ func AliasRc(alias []string){
     aliasMap[alias[0]] = alias[1:]
 }
 
-func ShowAlias() {
+func ShowAlias() string {
     if len(aliasMap) == 0 {
-        fmt.Println("No aliases set.")
-        return
+        return "No aliases set."
     }
-    fmt.Println("Current aliases:")
+    result := "Current aliases:\n"
     for name, cmd := range aliasMap {
-        fmt.Printf("%s: %v\n", name, cmd)
+        result += fmt.Sprintf("%s: %v\n", name, cmd)
     }
+    return result
 }
-func UnsetAlias(aliasName string) {
+
+func UnsetAlias(aliasName string) string {
     delete(aliasMap, aliasName)
-	fmt.Printf("Alias: '%s' unset successfully.\n",aliasName)
+    return fmt.Sprintf("Alias: '%s' unset successfully.", aliasName)
 }

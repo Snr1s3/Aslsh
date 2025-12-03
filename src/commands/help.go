@@ -1,18 +1,17 @@
 package commands
-import (
-	"fmt"
-)
-var cd =      "cd	  Change the current directory\n"
-var exit =    "exit	  Exit the shell\n"
-var pwd =     "pwd	  Print the current working directory\n"
-var echo =    "echo	  Print arguments to the terminal\n"
-var export =  "export	  Set environment variables\n"
-var unset =   "unset	  Unset environment variables\n"
-var alias =   "alias     Define command shortcuts\n"
-var help =    "help      Show help for built-in commands\n"
-var history = "history	  Show command history\n"
-var source = "source 	  Reload .aslshrc\n"
-var clear =   "clear	  Clear the terminal screen"
-func Help(){
-	fmt.Println(cd+exit+pwd+echo+export+unset+alias+help+history+source+clear)
+
+var Msg = `cd       Change the current directory
+exit     Exit the shell
+pwd      Print the current working directory
+echo     Print arguments to the terminal
+export   Set environment variables
+unset    Unset environment variables
+alias    Define command shortcuts
+help     Show help for built-in commands
+history  Show command history
+source   Reload .aslshrc
+clear    Clear the terminal screen`
+
+func Help() string {
+    return Msg
 }
