@@ -9,6 +9,7 @@ import (
 func Cat(parts []string){
 	var path string
 		if len(parts) == 1{
+			fmt.Println("aslsh: cd: needs a path")
 			return
 		} else if len(parts) > 2{
 			fmt.Println("aslsh: cd: too many arguments")

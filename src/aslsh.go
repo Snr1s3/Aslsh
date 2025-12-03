@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aslsh/commands/commands"
+	"aslsh/commands"
 	"bufio"
 	"fmt"
 	"log"
@@ -66,7 +66,7 @@ func classifier(parts []string) bool{
 		case "echo":
 			commands.Echo(parts)
 		case "pwd":
-			commands.Pwd()
+			fmt.Println(commands.Pwd())
 		case "clear":
 			commands.Clear()
 		case "history":
