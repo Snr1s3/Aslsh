@@ -7,7 +7,7 @@ import (
 )
 
 var aliasMap map[string][]string = make(map[string][]string)
-var commandList = []string{"cd", "exit", "pwd", "echo", "help", "history", "clear", "source","alias","cat"}
+var commandList = []string{"cd", "exit", "pwd", "echo", "help", "history", "clear", "source","alias","cat", "ls"}
 var validAliasStart = regexp.MustCompile(`^[^-=|><&;$` + "`" + `"'\\/:#@]`)
 
 func Alias(alias []string) string {
