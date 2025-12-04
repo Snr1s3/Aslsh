@@ -28,6 +28,7 @@ func main() {
         readline.PcItem("ls"),
         readline.PcItem("cat"),
         readline.PcItem("touch"),
+        readline.PcItem("mv"),
 		)
 	rl, err := readline.NewEx(&readline.Config{
         Prompt:       cmd,
@@ -69,7 +70,7 @@ func classifier(parts []string) bool {
     case "echo":
         output = commands.Echo(parts)
     case "pwd":
-        output, err = commands.Pwd()
+        output = commands.Pwd()
     case "clear":
         output = commands.Clear()
     case "history":
@@ -91,6 +92,8 @@ func classifier(parts []string) bool {
         output, err = commands.Cat(parts)
     case "touch":
         output = commands.Touch(parts[1])
+    case "mv":
+        output = commands.Mv(parts)
     default:
         if len(parts[0]) != 0 {
             output = "aslsh: " + parts[0] + ": command not found"

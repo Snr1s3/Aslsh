@@ -48,21 +48,18 @@ func SetAlias(alias []string) string {
     return fmt.Sprintf("Alias '%s' set to: %v", alias[2], alias[3:])
 }
 
-func AliasRc(alias []string){
+func AliasRc(alias []string) string {
     if !slices.Contains(commandList, alias[1]) {
-        fmt.Println("Command not found:", alias[1])
-				fmt.Println(alias[1])
-        return
+        return fmt.Sprintf("Command not found: %s", alias[1])
     }
-		if _, exists := aliasMap[alias[0]]; exists {
-				return
-		}
-    if !validAliasStart.MatchString(alias[0]) || slices.Contains(commandList, alias[0]){
-        fmt.Println("Alias name starts with a forbidden character.")
-				fmt.Println(alias)
-        return
+    if _, exists := aliasMap[alias[0]]; exists {
+        return fmt.Sprintf("Alias '%s' already exists.", alias[0])
+    }
+    if !validAliasStart.MatchString(alias[0]) || slices.Contains(commandList, alias[0]) {
+        return fmt.Sprintf("Alias name starts with a forbidden character: %v", alias)
     }
     aliasMap[alias[0]] = alias[1:]
+    return fmt.Sprintf("Alias '%s' set to: %v", alias[0], alias[1:])
 }
 
 func ShowAlias() string {

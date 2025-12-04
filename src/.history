@@ -187,3 +187,9 @@ cat
 test
 cat
 pwd
+mv ../.gitignore ./
+pwd
+mv ../.gitignore ../.gitignorewewe
+mv ../.gitignorewewe ../.gitignore
+mv ../.gitignore ./git
+mv ./git ../.gitignore
