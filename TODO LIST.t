@@ -1,4 +1,3 @@
-mv — Move or rename files and directories
 cp — Copy files and directories
 rm — Remove files and directories
 mkdir — Create new directories
