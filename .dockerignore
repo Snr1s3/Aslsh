@@ -1,0 +1,17 @@
+# Ignore GitHub workflows
+.github/
+
+# Ignore TODO list
+TODO_LIST.t
+
+# Ignore gitignore file
+.gitignore
+
+# Ignore README
+README.md
+
+# Ignore Testing 
+src/testing
+
+# Ignore aslsh
+src/aslsh
