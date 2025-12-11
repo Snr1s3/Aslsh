@@ -2,7 +2,7 @@ name: Notify Me
 
 on:
   workflow_run:
-    workflows: ["Go Test"]
+    workflows: ["Go Test Build"]
     types:
       - completed
 jobs:
