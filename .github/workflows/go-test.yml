@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./bot/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: snr1s3/aslsh:latest
           platforms: linux/amd64,linux/arm64
