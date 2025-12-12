@@ -31,3 +31,21 @@ func TestReadHistoryError(t *testing.T) {
 		t.Error("ReadHistory() should return error for non-existent file")
 	}
 }
+
+func TestCleanHistory(t *testing.T) {
+	filename := commands.GetHistoryPath()
+	os.WriteFile(filename, []byte("line1\nline2"), 0644)
+
+	_, err := commands.CleanHistory()
+	if err != nil {
+		t.Fatalf("CleanHistory() error: %v", err)
+	}
+
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		t.Fatalf("Failed to read file: %v", err)
+	}
+	if len(data) != 0 {
+		t.Errorf("File not empty after CleanHistory(), got: %q", string(data))
+	}
+}

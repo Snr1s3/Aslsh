@@ -27,7 +27,7 @@ func TestTouchAndCat(t *testing.T) {
 		t.Errorf("Cat() = %q, want %q", got, content)
 	}
 	got, err = commands.Cat([]string{"cat", "nofile.txt"})
-	if got != "cat: nofile.txt: No such file or directory" {
+	if got != "cat: nofile.txt: no such file or directory" {
 		t.Errorf("Cat() non-existent = %q, want error message", got)
 	}
 }
@@ -41,5 +41,3 @@ func TestTouchError(t *testing.T) {
 		t.Errorf("Touch() error message not returned for bad path: %s", msg)
 	}
 }
-
-

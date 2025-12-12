@@ -11,8 +11,8 @@ import (
 // =======================
 func TestCatIsDir(t *testing.T) {
 	got, _ := commands.Cat([]string{"cat", "."})
-	if !strings.Contains(got, "Is not a file") {
-		t.Errorf("Cat() on directory = %q, want 'Is not a file' error", got)
+	if !strings.Contains(got, "is not a file") {
+		t.Errorf("Cat() on directory = %q, want 'is not a file' error", got)
 	}
 }
 
