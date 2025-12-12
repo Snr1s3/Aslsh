@@ -30,6 +30,8 @@ func main() {
 		readline.PcItem("cat"),
 		readline.PcItem("touch"),
 		readline.PcItem("mv"),
+		readline.PcItem("uptime"),
+		readline.PcItem("whoami"),
 	)
 	rl, err := readline.NewEx(&readline.Config{
 		Prompt:       cmd,
@@ -68,6 +70,10 @@ func classifier(parts []string) bool {
 	switch parts[0] {
 	case "echo":
 		output = commands.Echo(parts)
+	case "whoami":
+		output = commands.Whoami()
+	case "uptime":
+		output = commands.Uptime()
 	case "pwd":
 		output = commands.Pwd()
 	case "clear":
