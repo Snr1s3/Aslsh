@@ -6,13 +6,12 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"regexp"
 	"strings"
 
 	"github.com/chzyer/readline"
 )
 
-var path = "./.history"
+var Path = commands.GetHistoryPath()
 var cmd string = "$> "
 var exitB bool = false
 
@@ -34,7 +33,7 @@ func main() {
 	)
 	rl, err := readline.NewEx(&readline.Config{
 		Prompt:       cmd,
-		HistoryFile:  path,
+		HistoryFile:  Path,
 		HistoryLimit: 1000,
 		AutoComplete: completer,
 	})
@@ -56,9 +55,7 @@ func main() {
 		if line == "exit" {
 			exitB = true
 		} else {
-			re := regexp.MustCompile(`\s+`)
-			line = re.ReplaceAllString(line, " ")
-			parts := strings.Split(line, " ")
+			parts := strings.Fields(line)
 			exitB = classifier(parts)
 		}
 	}
@@ -76,7 +73,7 @@ func classifier(parts []string) bool {
 	case "clear":
 		output = commands.Clear()
 	case "history":
-		output, err = commands.ReadHistory(path)
+		output, err = commands.History(parts)
 	case "help":
 		output = commands.Help()
 	case "alias":
@@ -111,8 +108,8 @@ func classifier(parts []string) bool {
 }
 
 func initAslsh() {
-	path := "./.aslshrc"
-	file, err := os.Open(path)
+	pathrc := "./.aslshrc"
+	file, err := os.Open(pathrc)
 	if err != nil {
 		log.Fatalf("failed to open file: %s", err)
 	}

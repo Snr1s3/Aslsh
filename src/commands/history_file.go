@@ -7,6 +7,11 @@ import (
 	"strings"
 )
 
+var path = "./.history"
+
+func GetHistoryPath() string {
+	return path
+}
 func ReadHistory(path string) (string, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -26,4 +31,22 @@ func ReadHistory(path string) (string, error) {
 		return "", fmt.Errorf("error reading file: %w", err)
 	}
 	return strings.Join(lines, "\n"), nil
+}
+func CleanHistory() (string, error) {
+	file, err := os.OpenFile(path, os.O_TRUNC|os.O_WRONLY, 0644)
+	if err != nil {
+		return "", fmt.Errorf("failed to clean history: %w", err)
+	}
+	defer file.Close()
+	return "history cleaned", nil
+}
+
+func History(parts []string) (string, error) {
+	if len(parts) == 1 {
+		return ReadHistory(path)
+	}
+	if len(parts) == 2 && parts[1] == "-c" {
+		return CleanHistory()
+	}
+	return "aslsh: history: invalid arguments", nil
 }

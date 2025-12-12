@@ -14,17 +14,17 @@ func Cat(parts []string) (string, error) {
 	path := parts[1]
 	f, err := os.Stat(path)
 	if os.IsNotExist(err) {
-		return "cat: " + path + ": No such file or directory", nil
+		return "cat: " + path + ": no such file or directory", nil
 	}
 	if f.IsDir() {
-		return "cat: " + path + ": Is not a file", nil
+		return "cat: " + path + ": is not a file", nil
 	}
 	if os.IsPermission(err) {
-		return "cat: " + path + ": Permission denied", nil
+		return "cat: " + path + ": permission denied", nil
 	}
 	data, erro := os.ReadFile(path)
 	if erro != nil {
-		return "", fmt.Errorf("Error: %w", erro)
+		return "", fmt.Errorf("error: %w", erro)
 	}
 	return string(data), nil
 }
