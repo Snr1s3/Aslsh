@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/chzyer/readline"
 )
@@ -31,6 +32,8 @@ func main() {
 		readline.PcItem("touch"),
 		readline.PcItem("mv"),
 		readline.PcItem("uptime"),
+		readline.PcItem("time"),
+		readline.PcItem("mkdir"),
 		readline.PcItem("whoami"),
 	)
 	rl, err := readline.NewEx(&readline.Config{
@@ -66,10 +69,13 @@ func classifier(parts []string) bool {
 	parts = commands.GetAlias(parts)
 	var output string
 	var err error
-
 	switch parts[0] {
 	case "echo":
 		output = commands.Echo(parts)
+	case "mkdir":
+		output = commands.Mkdir(parts)
+	case "time":
+		output = time.Now().Format(time.RFC1123)
 	case "whoami":
 		output = commands.Whoami()
 	case "uptime":
