@@ -69,9 +69,14 @@ func classifier(parts []string) bool {
 	parts = commands.GetAlias(parts)
 	var output string
 	var err error
+	if len(parts) == 0 {
+		return false
+	}
 	switch parts[0] {
 	case "echo":
 		output = commands.Echo(parts)
+	case "cp":
+		output = commands.Cp(parts)
 	case "mkdir":
 		output = commands.Mkdir(parts)
 	case "time":
@@ -94,7 +99,6 @@ func classifier(parts []string) bool {
 		return true
 	case "source":
 		initAslsh()
-		return false
 	case "cd":
 		output = commands.Cd(parts)
 	case "ls":

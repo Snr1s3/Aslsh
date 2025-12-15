@@ -10,3 +10,7 @@ mkdir hola
 ls
 mkdir hola
 ls
+sd
+cp hola ../
+cp hola ../bondia
+cp hola ../bondiad/
