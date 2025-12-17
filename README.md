@@ -1,6 +1,8 @@
 # Aslsh
 
-A simple shell written in Go for learning purposes.
+A simple shell written in Go for learning purposes.              
+
+[![Docker Hub](https://img.shields.io/badge/dockerhub-snr1s3%2Faslsh-blue?logo=docker)](https://hub.docker.com/repository/docker/snr1s3/aslsh/general)
 
 ## Features
 
