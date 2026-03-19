@@ -75,8 +75,6 @@ func classifier(parts []string) bool {
 	switch parts[0] {
 	case "echo":
 		output = commands.Echo(parts)
-	case "cp":
-		output = commands.Cp(parts)
 	case "mkdir":
 		output = commands.Mkdir(parts)
 	case "time":
