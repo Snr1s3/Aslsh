@@ -29,15 +29,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: snr1s3/aslsh:latest
-          platforms: linux/amd64,linux/arm64
-
       - name: Upload a new image to docker
         uses: Snr1s3/upload-to-docker-action@1.0.2
         with:
