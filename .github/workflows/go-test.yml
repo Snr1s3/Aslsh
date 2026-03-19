@@ -38,8 +38,8 @@ jobs:
           tags: snr1s3/aslsh:latest
           platforms: linux/amd64,linux/arm64
 
-      - name: Upload to Docker
-        uses: your-username/upload-to-docker-action@v1
+      - name: Upload a new image to docker
+        uses: Snr1s3/upload-to-docker-action@1.0.1
         with:
           docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
           docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
