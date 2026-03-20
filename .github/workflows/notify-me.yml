@@ -15,7 +15,7 @@ jobs:
           telegram_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           telegram_chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
           message: |
-            🔔 *${{ github.repository }}* ${{ secrets.TELEGRAM_CHAT_ID }}
+            🔔 *${{ github.repository }}*
             *Workflow:* ${{ github.event.workflow_run.name }}
             *Conclusion:* ${{ github.event.workflow_run.conclusion }}
             *Run:* ${{ github.event.workflow_run.html_url }}
